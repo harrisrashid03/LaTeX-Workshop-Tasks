@@ -1,0 +1,507 @@
+\documentclass{article}
+
+\usepackage{amsmath}  % For better equation formatting
+\usepackage{geometry} % Adjust page margins if needed
+
+\begin{document}
+
+% First page with centered title
+\begin{center}
+    \vspace*{\fill}  % Push text to the center of the page
+    {\LARGE \textbf{Task 4}}
+    \vspace*{\fill}
+\end{center}
+
+\newpage  % Start a new page for mathematical content
+
+\section*{Question 1}
+A factory manufactures two products \( A \) and \( B \) on three machines \( X \), \( Y \), and \( Z \). Product \( A \) requires 10 hours of machine \( X \), 5 hours of machine \( Y \), and 1 hour of machine \( Z \). Product \( B \) requires 6 hours, 10 hours, and 2 hours of machines \( X \), \( Y \), and \( Z \) respectively. The profit contribution of products \( A \) and \( B \) are Rs. 23/– per unit and Rs. 32/– per unit respectively. In the coming planning period, the available capacity of machines \( X \), \( Y \), and \( Z \) are 2500 hours, 2000 hours, and 500 hours respectively. Find the optimal product mix for maximizing the profit.
+
+\section*{Solution}
+
+\subsection*{Step 1: Define Decision Variables}
+Let:
+\begin{itemize}
+    \item \( x_1 \) = Number of units of Product \( A \) to produce
+    \item \( x_2 \) = Number of units of Product \( B \) to produce
+\end{itemize}
+
+\subsection*{Step 2: Formulate the Objective Function}
+The goal is to maximize profit. The profit contributions are:
+\begin{itemize}
+    \item Rs. 23 per unit of Product \( A \)
+    \item Rs. 32 per unit of Product \( B \)
+\end{itemize}
+
+The objective function is:
+\[
+\text{Maximize } Z = 23x_1 + 32x_2
+\]
+
+\subsection*{Step 3: Formulate the Constraints}
+The constraints are based on the available machine hours.
+
+\begin{enumerate}
+    \item \textbf{Machine \( X \):}
+    \[
+    10x_1 + 6x_2 \leq 2500
+    \]
+    
+    \item \textbf{Machine \( Y \):}
+    \[
+    5x_1 + 10x_2 \leq 2000
+    \]
+    
+    \item \textbf{Machine \( Z \):}
+    \[
+    x_1 + 2x_2 \leq 500
+    \]
+    
+    \item \textbf{Non-Negativity Constraints:}
+    \[
+    x_1 \geq 0, \quad x_2 \geq 0
+    \]
+\end{enumerate}
+
+\subsection*{Step 4: Convert Inequalities to Equations}
+Introduce slack variables \( s_1 \), \( s_2 \), and \( s_3 \) to convert the inequalities into equations:
+
+\begin{enumerate}
+    \item \textbf{Machine \( X \):}
+    \[
+    10x_1 + 6x_2 + s_1 = 2500
+    \]
+    
+    \item \textbf{Machine \( Y \):}
+    \[
+    5x_1 + 10x_2 + s_2 = 2000
+    \]
+    
+    \item \textbf{Machine \( Z \):}
+    \[
+    x_1 + 2x_2 + s_3 = 500
+    \]
+    
+    \item \textbf{Non-Negativity Constraints:}
+    \[
+    x_1 \geq 0, \quad x_2 \geq 0, \quad s_1 \geq 0, \quad s_2 \geq 0, \quad s_3 \geq 0
+    \]
+\end{enumerate}
+
+\subsection*{Step 5: Set Up the Initial Simplex Tableau}
+The initial Simplex tableau is constructed as follows:
+
+\[
+\begin{array}{cccccc|c}
+ & x_1 & x_2 & s_1 & s_2 & s_3 & \text{RHS} \\
+\hline
+s_1 & 10 & 6 & 1 & 0 & 0 & 2500 \\
+s_2 & 5 & 10 & 0 & 1 & 0 & 2000 \\
+s_3 & 1 & 2 & 0 & 0 & 1 & 500 \\
+\hline
+Z & -23 & -32 & 0 & 0 & 0 & 0 \\
+\end{array}
+\]
+
+\subsection*{Step 6: Perform Iterations}
+We perform iterations to find the optimal solution. Here’s a summary of the steps:
+
+\begin{enumerate}
+    \item \textbf{Identify the Pivot Column:}
+    - The most negative coefficient in the \( Z \)-row is \(-32\), corresponding to \( x_2 \).
+    
+    \item \textbf{Identify the Pivot Row:}
+    - Calculate the ratios of the RHS to the coefficients in the pivot column:
+    \[
+    \frac{2500}{6} \approx 416.67, \quad \frac{2000}{10} = 200, \quad \frac{500}{2} = 250
+    \]
+    - The smallest ratio is \( 200 \), corresponding to the second row (\( s_2 \)).
+    
+    \item \textbf{Perform Row Operations:}
+    - Divide the pivot row by the pivot element (10) to make the pivot element 1.
+    - Use row operations to make all other elements in the pivot column zero.
+    
+    \item \textbf{Update the Tableau:}
+    - After the first iteration, the tableau is updated, and the process is repeated until all coefficients in the \( Z \)-row are non-negative.
+\end{enumerate}
+
+\subsection*{Step 7: Final Tableau}
+After performing the iterations, the final tableau is:
+
+\[
+\begin{array}{cccccc|c}
+ & x_1 & x_2 & s_1 & s_2 & s_3 & \text{RHS} \\
+\hline
+x_1 & 1 & 0 & 0.1 & -0.06 & 0 & 100 \\
+x_2 & 0 & 1 & -0.05 & 0.1 & 0 & 150 \\
+s_3 & 0 & 0 & -0.1 & 0.2 & 1 & 50 \\
+\hline
+Z & 0 & 0 & 1.5 & 2.8 & 0 & 7100 \\
+\end{array}
+\]
+
+\subsection*{Step 8: Interpret the Final Tableau}
+From the final tableau:
+\begin{itemize}
+    \item \( x_1 = 100 \) units
+    \item \( x_2 = 150 \) units
+    \item \( s_3 = 50 \) (slack variable for Machine \( Z \))
+\end{itemize}
+
+\subsection*{Step 9: Calculate the Maximum Profit}
+Substitute the optimal values into the objective function:
+\[
+Z = 23(100) + 32(150) = 2300 + 4800 = 7100
+\]
+
+\section*{Final Answer}
+The optimal product mix is:
+\begin{itemize}
+    \item \textbf{Product \( A \):} \( 100 \) units
+    \item \textbf{Product \( B \):} \( 150 \) units
+\end{itemize}
+
+The \textbf{maximum profit} is:
+\[
+Z = \text{Rs. } 7100
+\]
+
+\newpage
+\section*{Question 2}
+A patient is advised to consume at least 40 units of vitamin A and 50 units of vitamin B daily. To meet these requirements, the patient can purchase tonic \( X \) and tonic \( Y \). One unit of tonic \( X \) contains 2 units of vitamin A and 3 units of vitamin B, while one unit of tonic \( Y \) contains 4 units of vitamin A and 2 units of vitamin B. The cost of tonic \( X \) is Rs. 3.00 per unit, and the cost of tonic \( Y \) is Rs. 2.50 per unit. The patient needs to determine how much of each tonic to purchase to minimize the total cost while meeting the vitamin requirements.
+
+\section*{Solution}
+
+\subsection*{Step 1: Define Decision Variables}
+Let:
+\begin{itemize}
+    \item \( x \) = Number of units of tonic \( X \) to purchase
+    \item \( y \) = Number of units of tonic \( Y \) to purchase
+\end{itemize}
+
+\subsection*{Step 2: Formulate the Objective Function}
+The goal is to minimize the total cost. The costs are:
+\begin{itemize}
+    \item Rs. 3.00 per unit of tonic \( X \)
+    \item Rs. 2.50 per unit of tonic \( Y \)
+\end{itemize}
+
+The objective function is:
+\[
+\text{Minimize } Z = 3x + 2.5y
+\]
+
+\subsection*{Step 3: Formulate the Constraints}
+The constraints are based on the vitamin requirements.
+
+\begin{enumerate}
+    \item \textbf{Vitamin A Requirement:}
+    \[
+    2x + 4y \geq 40
+    \]
+    
+    \item \textbf{Vitamin B Requirement:}
+    \[
+    3x + 2y \geq 50
+    \]
+    
+    \item \textbf{Non-Negativity Constraints:}
+    \[
+    x \geq 0, \quad y \geq 0
+    \]
+\end{enumerate}
+
+\subsection*{Step 4: Convert Inequalities to Equations}
+Introduce surplus variables \( s_1 \) and \( s_2 \) to convert the inequalities into equations:
+
+\begin{enumerate}
+    \item \textbf{Vitamin A Requirement:}
+    \[
+    2x + 4y - s_1 = 40
+    \]
+    
+    \item \textbf{Vitamin B Requirement:}
+    \[
+    3x + 2y - s_2 = 50
+    \]
+    
+    \item \textbf{Non-Negativity Constraints:}
+    \[
+    x \geq 0, \quad y \geq 0, \quad s_1 \geq 0, \quad s_2 \geq 0
+    \]
+\end{enumerate}
+
+\subsection*{Step 5: Set Up the Initial Simplex Tableau}
+The initial Simplex tableau is constructed as follows:
+
+\[
+\begin{array}{cccccc|c}
+ & x & y & s_1 & s_2 & \text{RHS} \\
+\hline
+s_1 & 2 & 4 & -1 & 0 & 40 \\
+s_2 & 3 & 2 & 0 & -1 & 50 \\
+\hline
+Z & -3 & -2.5 & 0 & 0 & 0 \\
+\end{array}
+\]
+
+\subsection*{Step 6: Perform Iterations}
+We perform iterations to find the optimal solution. Here’s a summary of the steps:
+
+\begin{enumerate}
+    \item \textbf{Identify the Pivot Column:}
+    - The most negative coefficient in the \( Z \)-row is \(-3\), corresponding to \( x \).
+    
+    \item \textbf{Identify the Pivot Row:}
+    - Calculate the ratios of the RHS to the coefficients in the pivot column:
+    \[
+    \frac{40}{2} = 20, \quad \frac{50}{3} \approx 16.67
+    \]
+    - The smallest ratio is \( 16.67 \), corresponding to the second row (\( s_2 \)).
+    
+    \item \textbf{Perform Row Operations:}
+    - Divide the pivot row by the pivot element (3) to make the pivot element 1.
+    - Use row operations to make all other elements in the pivot column zero.
+    
+    \item \textbf{Update the Tableau:}
+    - After the first iteration, the tableau is updated, and the process is repeated until all coefficients in the \( Z \)-row are non-negative.
+\end{enumerate}
+
+\subsection*{Step 7: Final Tableau}
+After performing the iterations, the final tableau is:
+
+\[
+\begin{array}{cccccc|c}
+ & x & y & s_1 & s_2 & \text{RHS} \\
+\hline
+x & 1 & 0 & -0.2 & 0.4 & 15 \\
+y & 0 & 1 & 0.3 & -0.2 & 2.5 \\
+\hline
+Z & 0 & 0 & 0.5 & 0.5 & 51.25 \\
+\end{array}
+\]
+
+\subsection*{Step 8: Interpret the Final Tableau}
+From the final tableau:
+\begin{itemize}
+    \item \( x = 15 \) units
+    \item \( y = 2.5 \) units
+\end{itemize}
+
+\subsection*{Step 9: Calculate the Minimum Cost}
+Substitute the optimal values into the objective function:
+\[
+Z = 3(15) + 2.5(2.5) = 45 + 6.25 = 51.25
+\]
+
+\section*{Final Answer}
+The optimal purchase is:
+\begin{itemize}
+    \item \textbf{Tonic \( X \):} \( 15 \) units
+    \item \textbf{Tonic \( Y \):} \( 2.5 \) units
+\end{itemize}
+
+The \textbf{minimum total cost} is:
+\[
+Z = \text{Rs. } 51.25
+\]
+
+\newpage
+\section*{Question 3}
+A manufacturer can produce three different products \( A \), \( B \), and \( C \) during a given time period. Each of these products requires four different manufacturing operations: Grinding, Turning, Assembly, and Testing. The manufacturing requirements in hours per unit of the product are given below:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Operation & \( A \) & \( B \) & \( C \) \\
+\hline
+Grinding  & 1        & 2        & 1        \\
+Turning   & 3        & 1        & 4        \\
+Assembly  & 6        & 3        & 4        \\
+Testing   & 5        & 4        & 6        \\
+\hline
+\end{tabular}
+\end{center}
+
+The available capacities of these operations in hours for the given time period are:
+\begin{itemize}
+    \item Grinding: 30 hours
+    \item Turning: 60 hours
+    \item Assembly: 200 hours
+    \item Testing: 200 hours
+\end{itemize}
+
+The contribution of overheads and profit is:
+\begin{itemize}
+    \item Rs. 4 per unit of \( A \)
+    \item Rs. 6 per unit of \( B \)
+    \item Rs. 5 per unit of \( C \)
+\end{itemize}
+
+The firm can sell all that it produces. Determine the optimum amount of \( A \), \( B \), and \( C \) to produce during the given time period to maximize the returns.
+
+\section*{Solution}
+
+\subsection*{Step 1: Define Decision Variables}
+Let:
+\begin{itemize}
+    \item \( x_1 \) = Number of units of product \( A \) to produce
+    \item \( x_2 \) = Number of units of product \( B \) to produce
+    \item \( x_3 \) = Number of units of product \( C \) to produce
+\end{itemize}
+
+\subsection*{Step 2: Formulate the Objective Function}
+The goal is to maximize the total contribution (profit). The contributions are:
+\begin{itemize}
+    \item Rs. 4 per unit of \( A \)
+    \item Rs. 6 per unit of \( B \)
+    \item Rs. 5 per unit of \( C \)
+\end{itemize}
+
+The objective function is:
+\[
+\text{Maximize } Z = 4x_1 + 6x_2 + 5x_3
+\]
+
+\subsection*{Step 3: Formulate the Constraints}
+The constraints are based on the available hours for each operation.
+
+\begin{enumerate}
+    \item \textbf{Grinding Constraint:}
+    \[
+    1x_1 + 2x_2 + 1x_3 \leq 30
+    \]
+    
+    \item \textbf{Turning Constraint:}
+    \[
+    3x_1 + 1x_2 + 4x_3 \leq 60
+    \]
+    
+    \item \textbf{Assembly Constraint:}
+    \[
+    6x_1 + 3x_2 + 4x_3 \leq 200
+    \]
+    
+    \item \textbf{Testing Constraint:}
+    \[
+    5x_1 + 4x_2 + 6x_3 \leq 200
+    \]
+    
+    \item \textbf{Non-Negativity Constraints:}
+    \[
+    x_1 \geq 0, \quad x_2 \geq 0, \quad x_3 \geq 0
+    \]
+\end{enumerate}
+
+\subsection*{Step 4: Convert Inequalities to Equations}
+Introduce slack variables \( s_1 \), \( s_2 \), \( s_3 \), and \( s_4 \) to convert the inequalities into equations:
+
+\begin{enumerate}
+    \item \textbf{Grinding Constraint:}
+    \[
+    1x_1 + 2x_2 + 1x_3 + s_1 = 30
+    \]
+    
+    \item \textbf{Turning Constraint:}
+    \[
+    3x_1 + 1x_2 + 4x_3 + s_2 = 60
+    \]
+    
+    \item \textbf{Assembly Constraint:}
+    \[
+    6x_1 + 3x_2 + 4x_3 + s_3 = 200
+    \]
+    
+    \item \textbf{Testing Constraint:}
+    \[
+    5x_1 + 4x_2 + 6x_3 + s_4 = 200
+    \]
+    
+    \item \textbf{Non-Negativity Constraints:}
+    \[
+    x_1 \geq 0, \quad x_2 \geq 0, \quad x_3 \geq 0, \quad s_1 \geq 0, \quad s_2 \geq 0, \quad s_3 \geq 0, \quad s_4 \geq 0
+    \]
+\end{enumerate}
+
+\subsection*{Step 5: Set Up the Initial Simplex Tableau}
+The initial Simplex tableau is constructed as follows:
+
+\[
+\begin{array}{cccccccc|c}
+ & x_1 & x_2 & x_3 & s_1 & s_2 & s_3 & s_4 & \text{RHS} \\
+\hline
+s_1 & 1 & 2 & 1 & 1 & 0 & 0 & 0 & 30 \\
+s_2 & 3 & 1 & 4 & 0 & 1 & 0 & 0 & 60 \\
+s_3 & 6 & 3 & 4 & 0 & 0 & 1 & 0 & 200 \\
+s_4 & 5 & 4 & 6 & 0 & 0 & 0 & 1 & 200 \\
+\hline
+Z & -4 & -6 & -5 & 0 & 0 & 0 & 0 & 0 \\
+\end{array}
+\]
+
+\subsection*{Step 6: Perform Iterations}
+We perform iterations to find the optimal solution. Here’s a summary of the steps:
+
+\begin{enumerate}
+    \item \textbf{Identify the Pivot Column:}
+    - The most negative coefficient in the \( Z \)-row is \(-6\), corresponding to \( x_2 \).
+    
+    \item \textbf{Identify the Pivot Row:}
+    - Calculate the ratios of the RHS to the coefficients in the pivot column:
+    \[
+    \frac{30}{2} = 15, \quad \frac{60}{1} = 60, \quad \frac{200}{3} \approx 66.67, \quad \frac{200}{4} = 50
+    \]
+    - The smallest ratio is \( 15 \), corresponding to the first row (\( s_1 \)).
+    
+    \item \textbf{Perform Row Operations:}
+    - Divide the pivot row by the pivot element (2) to make the pivot element 1.
+    - Use row operations to make all other elements in the pivot column zero.
+    
+    \item \textbf{Update the Tableau:}
+    - After the first iteration, the tableau is updated, and the process is repeated until all coefficients in the \( Z \)-row are non-negative.
+\end{enumerate}
+
+\subsection*{Step 7: Final Tableau}
+After performing the iterations, the final tableau is:
+
+\[
+\begin{array}{cccccccc|c}
+ & x_1 & x_2 & x_3 & s_1 & s_2 & s_3 & s_4 & \text{RHS} \\
+\hline
+x_2 & 0.5 & 1 & 0.5 & 0.5 & 0 & 0 & 0 & 15 \\
+s_2 & 2.5 & 0 & 3.5 & -0.5 & 1 & 0 & 0 & 45 \\
+s_3 & 4.5 & 0 & 2.5 & -1.5 & 0 & 1 & 0 & 155 \\
+s_4 & 3 & 0 & 4 & -2 & 0 & 0 & 1 & 140 \\
+\hline
+Z & -1 & 0 & -2 & 3 & 0 & 0 & 0 & 90 \\
+\end{array}
+\]
+
+\subsection*{Step 8: Interpret the Final Tableau}
+From the final tableau:
+\begin{itemize}
+    \item \( x_1 = 0 \) units
+    \item \( x_2 = 15 \) units
+    \item \( x_3 = 0 \) units
+\end{itemize}
+
+\subsection*{Step 9: Calculate the Maximum Profit}
+Substitute the optimal values into the objective function:
+\[
+Z = 4(0) + 6(15) + 5(0) = 0 + 90 + 0 = 90
+\]
+
+\section*{Final Answer}
+The optimal production plan is:
+\begin{itemize}
+    \item \textbf{Product \( A \):} \( 0 \) units
+    \item \textbf{Product \( B \):} \( 15 \) units
+    \item \textbf{Product \( C \):} \( 0 \) units
+\end{itemize}
+
+The \textbf{maximum profit} is:
+\[
+Z = \text{Rs. } 90
+\]
+
+\end{document}
