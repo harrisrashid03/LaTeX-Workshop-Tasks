@@ -34,6 +34,13 @@ Welcome to the repository showcasing the tasks I completed during a **LaTeX Work
 
 ---
 
+### 3️⃣ **Task 4: Compiling all 3 previous tasks**  
+🔹   Mastered all 3 previous tasks by creating a document which included basic document creation, tables and mathematical equations.
+
+> **Output:** A clean document showcasing proficiency in all 3 previous tasks.
+
+--- 
+
 ## 🚀 How to Compile
 
 1. **Install a LaTeX Editor:**  
